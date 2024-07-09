@@ -1,3 +1,6 @@
+from models import InvestmentOptionsSchema
+from data import projects_data
+
 # INVESTMENT RECOMMENDATIONS
 def analyze_investment_opportunities(properties):
     # Placeholder function for analyzing investment opportunities
