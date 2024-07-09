@@ -1,7 +1,7 @@
 from models import InvestmentOptionsSchema
-# from data_access import fetch_price_list
+# from data_access import fetch_price_lists
 from modules.filter_investment_options import filter_investment_options
-from data import price_list
+from data import price_list_data
 
 def gather_property_details(property_id):
     # try:
@@ -10,7 +10,7 @@ def gather_property_details(property_id):
       #  raise Exception(f"Failed to fetch price list: {e}")
 
     details = []
-    for price_info in price_list:
+    for price_info in price_list_data[property_id]:
         payment_plan = price_info['payment_plan']
         details.append({
             'Apartment Type': price_info['apratment_type'],
@@ -33,17 +33,17 @@ def run_property_details_and_insights(**kwargs):
     parameters = InvestmentOptionsSchema(**kwargs)
     filtered_projects = filter_investment_options(parameters)
     property_details = []
-
+    #print(filtered_projects)
     for item in filtered_projects:
-        property_id = item['property']['propertyID']
+        property_id = item['propertyID']
         details = gather_property_details(property_id)
         property_details.append({
-            'Project Name': item['project']['projectName'],
-            'Property Developer': item['project']['propertyDeveloper'],
-            'Location': item['project']['location'],
-            'Purpose': item['project']['purpose'],
-            'Completion Date': item['project']['completion_date'],
-            'Facilities': ", ".join(item['project']['facilities']),
+            'Project Name': item['projectName'],
+            'Property Developer': item['propertyDeveloper'],
+            'Location': item['location'],
+            'Purpose': item['purpose'],
+            'Completion Date': item['completion_date'],
+            'Facilities': ", ".join(item['facilities']),
             'Details': details
         })
 
