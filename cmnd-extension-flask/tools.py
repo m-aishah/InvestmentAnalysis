@@ -1,5 +1,4 @@
 from modules.cost_comparison import run_cost_comparison_module
-from modules.future_projections import run_future_projections_module
 # from modules.risk_analysis import run_risk_analysis_module
 from modules.property_details_and_insights import run_property_details_and_insights
 # from modules.rental_income_forecast import run_rental_income_forecast
