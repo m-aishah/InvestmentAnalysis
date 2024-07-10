@@ -1,6 +1,7 @@
 from models import InvestmentOptionsSchema
-from filter_investment_options import filter_investment_options
-import requests
+# from data_access import fetch_price_lists
+from modules.filter_investment_options import filter_investment_options
+from data import rental_incomes
 
 def fetch_rental_income(property_id: int):
     if property_id:
@@ -35,9 +36,11 @@ def run_rental_income_forecast(**kwargs):
     
     for project in filtered_projects:
         #Fetch rental income forecast data for specified property
-        rental_income = fetch_rental_income(int(project['propertyID']))
-            
+        # rental_income = fetch_rental_income(int(project['propertyID']))
+        rental_income = rental_incomes
         if rental_income:
             rental_income_data.append(rental_income)
+    
+    return {"rental_income_forecast": rental_income_data}
     
           
