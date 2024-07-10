@@ -159,6 +159,6 @@ if __name__ == "__main__":
         print(price_list)
         
     print("\nRental Income Data:")
-    for property_id, rental_income in rental_income_data.items():
+    for property_id, rental_income in rental_incomes.items():
         print(f"Property ID {property_id}:")
         print(rental_income)

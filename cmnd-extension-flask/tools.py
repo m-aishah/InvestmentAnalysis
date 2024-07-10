@@ -1,5 +1,5 @@
 from modules.cost_comparison import run_cost_comparison_module
-# from modules.risk_analysis import run_risk_analysis_module
+from modules.risk_analysis import run_risk_analysis_module
 from modules.property_details_and_insights import run_property_details_and_insights
 from modules.rental_income_forecast import run_rental_income_forecast
 # from modules.investment_recommendation  import run_investment_recommendation_wrapper
@@ -35,6 +35,17 @@ tools = [
         "description": "Provides detailed insights for each property",
         "parameters": custom_json_schema(InvestmentOptionsSchema),
         "runCmd": run_property_details_and_insights,
+        "isDangerous": False,
+        "functionType": "backend",
+        "isLongRunningTool": False,
+        "rerun": True,
+        "rerunWithDifferentParameters": True
+    },
+    {
+        "name": "risk_analysis_module",
+        "description": "Analyzes risk factors associated with property investment",
+        "parameters": custom_json_schema(InvestmentOptionsSchema),
+        "runCmd": run_risk_analysis_module,
         "isDangerous": False,
         "functionType": "backend",
         "isLongRunningTool": False,
