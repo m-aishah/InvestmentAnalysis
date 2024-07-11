@@ -1,10 +1,7 @@
-# modules/cost_comparison.py
-
 from models import InvestmentOptionsSchema
-from data import projects_data
-# from data_access import fetch_available_projects
-import pandas as pd
 from modules.filter_investment_options import filter_investment_options
+import pandas as pd
+
 
 def print_comparison_table(properties):
     if not properties:

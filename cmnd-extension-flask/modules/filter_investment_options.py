@@ -1,6 +1,6 @@
 from models import InvestmentOptionsSchema
 # from data_acccess import fetch_available_projects
-from data import projects_data
+from  dummy_data import projects_data
 
 def filter_investment_options(parameters: InvestmentOptionsSchema):
     # try:
@@ -29,6 +29,7 @@ def filter_investment_options(parameters: InvestmentOptionsSchema):
                     'projectName': project['projectName'],
                     'propertyDeveloper': project['propertyDeveloper'],
                     'location': project['location'],
+                    'description': project['description'],
                     'purpose': project['purpose'],
                     'start_date': project['start_date'],
                     'completion_date': project['completion_date'],

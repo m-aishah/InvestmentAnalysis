@@ -1,7 +1,7 @@
 from models import InvestmentOptionsSchema
-# from data_access import fetch_price_lists
 from modules.filter_investment_options import filter_investment_options
-from data import price_list_data
+# from data_access import fetch_price_lists
+from dummy_data import price_list_data
 
 def gather_property_details(property_id):
     # try:

@@ -1,7 +1,8 @@
 from models import InvestmentOptionsSchema
 # from data_access import fetch_price_lists
 from modules.filter_investment_options import filter_investment_options
-from data import rental_incomes
+from dummy_data import rental_income_data
+import requests
 
 def fetch_rental_income(property_id: int):
     if property_id:
@@ -32,15 +33,24 @@ def fetch_rental_income(property_id: int):
 def run_rental_income_forecast(**kwargs):
     parameters = InvestmentOptionsSchema(**kwargs)
     filtered_projects = filter_investment_options(parameters)
-    rental_income_data = []
+    forecast = []
     
     for project in filtered_projects:
+        property_id = project['propertyID']
         #Fetch rental income forecast data for specified property
         # rental_income = fetch_rental_income(int(project['propertyID']))
-        rental_income = rental_incomes
+        rental_income = rental_income_data[property_id]
         if rental_income:
-            rental_income_data.append(rental_income)
-    
-    return {"rental_income_forecast": rental_income_data}
+            forecast.append({
+                "projectID": property_id,
+                "projectName": project['projectName'],
+                "propertyDeveloper": project['propertyDeveloper'],
+                "location": project['location'],
+                "purpose": project['purpose'],
+                "description": project['description'],
+                "rental_income": rental_income
+            })
+    # Maybe use slicing to only return 1 or 2 in the list. Not the whole list.
+    return {"rental_income_forecast": forecast}
     
           
