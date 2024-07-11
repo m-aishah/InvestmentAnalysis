@@ -48,9 +48,10 @@ def run_rental_income_forecast(**kwargs):
                 "location": project['location'],
                 "purpose": project['purpose'],
                 "description": project['description'],
-                "rental_income": rental_income
+                "rental_income": {'optimistic': rental_income['optimistic'], 'pessimistic': rental_income['pessimistic'], 'realistic': rental_income['realistic']}
             })
     # Maybe use slicing to only return 1 or 2 in the list. Not the whole list.
-    return {"rental_income_forecast": forecast}
+    result = {"rental_income_forecast": forecast if len(forecast) > 0 else 'No property found with the given criteria.'}
+    return result
     
           
