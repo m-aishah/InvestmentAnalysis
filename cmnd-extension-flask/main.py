@@ -33,7 +33,9 @@ def run_cmnd_tool_endpoint():
     data = request.json
     tool_name = data.get('toolName')
     props = data.get('props', {})
+    #print(props)
     tool = next((t for t in tools if t['name'] == tool_name), None)
+    #print (tool)
     if not tool:
         abort(404, description="Tool not found")
     try:
