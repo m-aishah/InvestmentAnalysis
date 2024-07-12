@@ -39,10 +39,10 @@ def run_rental_income_forecast(**kwargs):
         property_id = project['propertyID']
         #Fetch rental income forecast data for specified property
         # rental_income = fetch_rental_income(int(project['propertyID']))
-        rental_income = rental_income_data[property_id]
+        rental_income = rental_income_data.get(property_id, None)
         if rental_income:
             forecast.append({
-                "projectID": property_id,
+                "propertyID": property_id,
                 "projectName": project['projectName'],
                 "propertyDeveloper": project['propertyDeveloper'],
                 "location": project['location'],

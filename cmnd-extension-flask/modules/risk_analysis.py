@@ -73,7 +73,7 @@ class RiskEvaluator:
 class RiskReportGenerator:
     def generate_report(self, property_data, risk_score, risk_factors):
         report = {
-            "property_id": property_data['propertyID'],
+            "propertyID": property_data['propertyID'],
             "property_name": property_data['projectName'],
             "location": property_data['location'],
             "risk_score": risk_score,
@@ -143,34 +143,39 @@ def run_risk_analysis_module(**kwargs):
     for item in filtered_projects:
         projectID = item['projectID']
         property_id = item['propertyID']
-        property_data = {
-            "propertyID": property_id,
-            "projectName": item['projectName'],
-            "propertyDeveloper": item['propertyDeveloper'],
-            "location": item['location'],
-            "purpose": item['purpose'],
-            "completion_date": item['completion_date'],
-            "facilities": item['facilities'],
-            "min_price": item['price'],
-            "max_price": item['price'],  
-            "percentage_sold": item['percentage_sold'],
-            "start_date": item['start_date'],
-            "rental_income": rental_income_data.get(property_id, {}),
-            "payment_plan": price_list_data.get(property_id, [{}])[0]['payment_plan'],
-            "developer_history": {}  # Placeholder for developer history
-        }
-        risk_score, risk_factors = evaluator.evaluate_property(property_data)
-        report = report_generator.generate_report(property_data, risk_score, risk_factors)
-        risk_analysis_report.append({
-            'Project Name': item['projectName'],
-            'Property Developer': item['propertyDeveloper'],
-            'Location': item['location'],
-            'Purpose': item['purpose'],
-            'Completion Date': item['completion_date'],
-            'Facilities': ", ".join(item['facilities']),
-            'Property Type': item['type'],
-            'Risk Report': report
-        })
+        rental_income = rental_income_data.get(property_id, None)
+        price_list = price_list_data.get(property_id, None)
+        if price_list: payment_plan = price_list[0]['payment_plan']
+        else: payment_plan = None
+        if rental_income and payment_plan:
+            property_data = {
+                "propertyID": property_id,
+                "projectName": item['projectName'],
+                "propertyDeveloper": item['propertyDeveloper'],
+                "location": item['location'],
+                "purpose": item['purpose'],
+                "completion_date": item['completion_date'],
+                "facilities": item['facilities'],
+                "min_price": item['price'],
+                "max_price": item['price'],  
+                "percentage_sold": item['percentage_sold'],
+                "start_date": item['start_date'],
+                "rental_income": rental_income,
+                "payment_plan": payment_plan,
+                "developer_history": {}  # Placeholder for developer history
+            }
+            risk_score, risk_factors = evaluator.evaluate_property(property_data)
+            report = report_generator.generate_report(property_data, risk_score, risk_factors)
+            risk_analysis_report.append({
+                'Project Name': item['projectName'],
+                'Property Developer': item['propertyDeveloper'],
+                'Location': item['location'],
+                'Purpose': item['purpose'],
+                'Completion Date': item['completion_date'],
+                'Facilities': ", ".join(item['facilities']),
+                'Property Type': item['type'],
+                'Risk Report': report
+            })
 
     return {"risk_analysis": risk_analysis_report}
 
