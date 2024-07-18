@@ -52,7 +52,11 @@ def run_property_details_and_insights(**kwargs):
                 'Purpose': item['purpose'],
                 'Completion Date': item['completion_date'],
                 'Facilities': ", ".join(item['facilities']),
-                'Property Details': details
+                'Property Details': details,
             })
-
+            if item['propertyDeveloper'] == 'Dovec':
+                property_details[-1]['360 view'] = 'https://360.dovecconstruction.com/'
+            if item['propertyDeveloper'] == 'Noyanlar':
+                property_details[-1]['360 view'] = 'https://360.noyanlar.com/'
+            
     return {"property_details": property_details}
