@@ -1,11 +1,9 @@
 from typing import List, Dict
-from dummy_data import rental_income_data, price_list_data, projects_data
 from models import InvestmentOptionsSchema
 from modules.filter_investment_options import filter_investment_options
+from modules.access_data import fetch_price_list, fetch_rental_income, fetch_available_projects
 
 def format_property_data(property, rental_income, price_list):
-        
-    
     # Extracting price data
     project_name = property['projectName']
     property_type = property['type']
@@ -19,27 +17,26 @@ def format_property_data(property, rental_income, price_list):
     net_rental_yield = rental_data_realistic.get('ROI', 0)
     
     # Constructing formatted data
-    
     formatted_data = {
-        "Metric": "Cost Comparison",
-        f"Project Name - {project_name} - Property {property['propertyID']}": f"{project_name} - {property['propertyID']}",
-        f"Property Type - {project_name} - {property_type}": property_type,
-        f"Location - {project_name} - {property['location']}": property['location'],
-        f"Price per Square Meter - {project_name} - {property_type}": f"€{property['price'] / property['total_area_sqmeter']:.0f}",
-        f"Total Price - {project_name} - {property_type}": f"€{total_price:,}",
-        f"Additional Fees - {project_name} - {property_type}": f"€{sum(additional_fees.values()):,}",
-        f"Total Cost Including Fees - {project_name} - {property_type}": f"€{total_cost_including_fees:,}",
-        f"Price to Income Ratio - {project_name} - {property_type}": f"{gross_rental_yield:.2f}",
-        f"Mortgage as Percentage of Income - {project_name} - {property_type}": f"{net_rental_yield:.2f}%",
-        f"Loan Affordability Index - {project_name} - {property_type}": f"{total_price / net_rental_yield:.2f}",
-        f"Gross Rental Yield - {project_name} - {property_type}": f"{gross_rental_yield:.2f}%",
-        f"Net Rental Yield - {project_name} - {property_type}": f"{net_rental_yield:.2f}%",
-        f"ROI - {project_name} - {property_type}": f"{rental_data_realistic.get('ROI', 0)}%",
-        f"Total Area (sqm) - {project_name} - {property_type}": property['total_area_sqmeter'],
-        f"Number of Rooms - {project_name} - {property_type}": f"{property['no_of_rooms']} bedrooms, {property['no_of_bathrooms']} bathrooms",
-        f"Facilities and Amenities - {project_name} - {property_type}": ', '.join(property['facilities']),
-        f"Estimated Completion Date - {project_name} - {property_type}": property['completion_date'],
-        f"Developer Track Record - {project_name} - {property_type}": "Excellent" if property['percentage_sold'] >= 70 else "Good"
+        "propertyID": property['propertyID'],
+        "projectName": project_name,
+        "Property": property_type,
+        "Location": property['location'],
+        "Price per Square Meter": f"€{property['price'] / property['total_area_sqmeter']:.0f}",
+        "Total Price": f"€{total_price:,}",
+        "Additional Fees": f"€{sum(additional_fees.values()):,}",
+        "Total Cost Including Fees": f"€{total_cost_including_fees:,}",
+        "Price to Income Ratio": f"{gross_rental_yield:.2f}",
+        "Mortgage as Percentage of Income": f"{net_rental_yield:.2f}%",
+        "Loan Affordability Index": f"{total_price / net_rental_yield:.2f}",
+        "Gross Rental Yield": f"{gross_rental_yield:.2f}%",
+        "Net Rental Yield": f"{net_rental_yield:.2f}%",
+        "ROI": f"{rental_data_realistic.get('ROI', 0)}%",
+        "Total Area (sqm)": property['total_area_sqmeter'],
+        "Number of Rooms": f"{property['no_of_rooms']} bedrooms, {property['no_of_bathrooms']} bathrooms",
+        "Facilities and Amenities": ', '.join(property['facilities']),
+        "Estimated Completion Date": property['completion_date'],
+        "Developer Track Record": "Excellent" if property['percentage_sold'] >= 70 or property['propertyDeveloper'] == "Dovec" else "Good"
     }
     
     return formatted_data
@@ -47,7 +44,6 @@ def format_property_data(property, rental_income, price_list):
 def run_cost_comparison_module(**props):
     try:
         parameters = InvestmentOptionsSchema(**props)
-        
     except Exception as e:
         return {"error": str(e)}
 
@@ -58,9 +54,16 @@ def run_cost_comparison_module(**props):
     comparison_data = []
     for property in properties:
         property_id = property['propertyID']
-        price_list = price_list_data.get(property_id, None)[0] if price_list_data.get(property_id, None) else None
-        rental_income = rental_income_data.get(property_id, None)
+        
+        try:
+            price_list = fetch_price_list(property_id)[0]
+            rental_income = fetch_rental_income(property_id)
+        except Exception as e:
+            print(f"error: Failed to fetch data for property ID {property_id}: {str(e)}")
+            continue
+
         if price_list and rental_income:
             formatted_data = format_property_data(property, rental_income, price_list)
-        comparison_data.append(formatted_data)
+            comparison_data.append(formatted_data)
+    
     return {"properties": comparison_data}

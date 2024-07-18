@@ -4,7 +4,7 @@ from typing import Optional, List, Dict
 class InvestmentOptionsSchema(BaseModel):
     budget_min: int = Field(0, title="Minimum Budget", description="Minimum budget for property investment")
     budget_max: int = Field(..., title="Maximum Budget", description="Maximum budget for property investment")
-    location: str = Field("", title="Location", description="Location preference for property investment")
+    location: str = Field(None, title="Location", description="Location preference for property investment")
     size_min: int = Field(0, title="Minimum Size", description="Minimum property size in square meters", ge=0)
     size_max: int = Field(0, title="Maximum Size", description="Maximum property size in square meters")
     bedrooms_min: int = Field(0, title="Minimum Bedrooms", description="Minimum number of bedrooms", ge=0)

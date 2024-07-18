@@ -1,18 +1,21 @@
+import requests
 from models import InvestmentOptionsSchema
-# from data_acccess import fetch_available_projects
-from  dummy_data import projects_data
+from modules.access_data import fetch_available_projects
 
 def filter_investment_options(parameters: InvestmentOptionsSchema):
-    # try:
-      #  projects_data = fetch_available_projects()
-    # except Exception as e:
-      #  raise Exception(f"Failed to fetch projects data: {e}")
-
+    try:
+        projects_data = fetch_available_projects(
+            location=parameters.location,
+            min_price=parameters.budget_min,
+            max_price=parameters.budget_max,
+            purpose='Residential' if parameters.family_size else None
+        )
+    except Exception as e:
+        raise Exception(f"Failed to fetch projects data: {e}")
+    
     filtered_projects = []
 
     for project in projects_data:
-        if parameters.location and project['location'] != parameters.location:
-            continue
         for property in project['property_types']:
             if (property['price'] >= parameters.budget_min and
                 property['price'] <= parameters.budget_max and
@@ -22,7 +25,6 @@ def filter_investment_options(parameters: InvestmentOptionsSchema):
                 (property['no_of_rooms'] <= parameters.bedrooms_max if parameters.bedrooms_max else True) and
                 (property['no_of_bathrooms'] >= parameters.bathrooms_min if parameters.bathrooms_min else True) and
                 (property['no_of_bathrooms'] <= parameters.bathrooms_max if parameters.bathrooms_max else True) and
-                (project['purpose'] == 'Residential' if parameters.family_size else True) and
                 (property['type'] == parameters.property_type if parameters.property_type else True)):
                 filtered_projects.append({
                     'projectID': project['projectID'],

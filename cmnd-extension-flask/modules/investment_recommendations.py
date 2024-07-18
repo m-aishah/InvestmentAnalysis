@@ -32,14 +32,7 @@ def run_investment_recommendation_wrapper(**kwargs):
                 break
         if RIF and RA and PDI:
             recommended_property = {
-                'propertyID': property_id,
-                'propertyID': property['propertyID'],
-                'Project Name': property['projectName'],
-                'Property Developer': property['propertyDeveloper'],
-                'Location': property['location'],
-                'Purpose': property['purpose'],
-                'Completion Date': property['completion_date'],
-                'Facilities': ", ".join(property['facilities']),
+                'Cost Comparison': property,
                 'Rental Income Forecast': RIF,
                 'Risk Analysis': RA,
                 'Property Details and Insights': PDI

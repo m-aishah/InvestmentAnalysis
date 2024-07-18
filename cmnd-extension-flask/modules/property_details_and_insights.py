@@ -1,18 +1,16 @@
 from models import InvestmentOptionsSchema
 from modules.filter_investment_options import filter_investment_options
-# from data_access import fetch_price_lists
-from dummy_data import price_list_data
+from modules.access_data import fetch_price_list
 
 def gather_property_details(property_id):
-    # try:
-      #  price_list = fetch_price_list(property_id)
-    # except Exception as e:
-      #  raise Exception(f"Failed to fetch price list: {e}")
+    try:
+        price_list = fetch_price_list(property_id)
+    except Exception as e:
+        raise Exception(f"Failed to fetch price list: {e}")
 
     details = []
-    property_price_list = price_list_data.get(property_id, None)
-    if property_price_list:
-        for price_info in property_price_list:
+    if price_list:
+        for price_info in price_list:
             payment_plan = price_info['payment_plan']
             details.append({
                 'Apartment Type': price_info['apratment_type'],
@@ -35,14 +33,17 @@ def gather_property_details(property_id):
 def run_property_details_and_insights(**kwargs):
     parameters = InvestmentOptionsSchema(**kwargs)
     filtered_projects = filter_investment_options(parameters)
-    # print(len(filtered_projects))
     
     property_details = []
-    # print(filtered_projects)
     for item in filtered_projects:
         property_id = item['propertyID']
-        details = gather_property_details(property_id)
-        if len(details) > 0:
+        try:
+            details = gather_property_details(property_id)
+        except Exception as e:
+            details = None
+            print(f"Error fetching property details for property ID {property_id}: {e}")
+        
+        if details and len(details) > 0:
             property_details.append({
                 'propertyID': item['propertyID'],
                 'Project Name': item['projectName'],
