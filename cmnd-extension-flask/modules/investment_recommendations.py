@@ -7,6 +7,7 @@ from modules.property_details_and_insights import run_property_details_and_insig
 def run_investment_recommendation_wrapper(**kwargs):
     # Initialize the InvestmentOptionsSchema with input parameters
     parameters = InvestmentOptionsSchema(**kwargs)
+    
     # Run each module's function and collect results
     cost_comparison_result = run_cost_comparison_module(**kwargs)
     rental_income_forecast_result = run_rental_income_forecast(**kwargs)
@@ -15,8 +16,6 @@ def run_investment_recommendation_wrapper(**kwargs):
 
     recommendations = []
     for property in cost_comparison_result['properties']:
-        
-        print(property)
         property_id = property['propertyID']
         RIF = None; RA = None; PDI = None
         for item in rental_income_forecast_result['rental_income_forecast']:

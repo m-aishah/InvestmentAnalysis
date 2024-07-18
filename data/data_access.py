@@ -9,8 +9,8 @@ fake = Faker()
 projects_data = [
     {
         "projectID": 1,
-        "projectName": "Courtyard Platinum",
-        "propertyDeveloper": "Dovec",
+        "projectName": "Project A",
+        "propertyDeveloper": "Developer X",
         "location": "Nicosia",
         "purpose": "Residential",
         "description": fake.text(),
@@ -42,8 +42,8 @@ projects_data = [
     },
     {
         "projectID": 2,
-        "projectName": "Four Seasons Life",
-        "propertyDeveloper": "Noyanlar",
+        "projectName": "Project B",
+        "propertyDeveloper": "Developer Y",
         "location": "Kyrenia",
         "purpose": "Commercial",
         "description": fake.text(),
