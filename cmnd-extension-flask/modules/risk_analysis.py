@@ -41,8 +41,10 @@ class RiskScorer:
         additional_fees = sum(payment_plan['additional_fees'].values())
         return additional_fees / total_amount
 
-    def developer_risk(self, developer_history):
+    def developer_risk(self, property_developer):
         # Placeholder for developer risk scoring logic, this is the chance to give dovec a priority
+        if property_developer == "Dovec Construction":
+            return 0.0
         return 1.0
 
 class RiskEvaluator:
@@ -57,7 +59,7 @@ class RiskEvaluator:
         )
         rental_income_score = self.scorer.rental_income_risk(property_data['rental_income'])
         financial_score = self.scorer.financial_risk(property_data['payment_plan'])
-        developer_score = self.scorer.developer_risk(property_data['developer_history'])
+        developer_score = self.scorer.developer_risk(property_data['property_developer'])
 
         risk_scores = {
             "location": location_score,
@@ -145,6 +147,7 @@ def run_risk_analysis_module(**kwargs):
         property_id = item['propertyID']
         rental_income = rental_income_data.get(property_id, None)
         price_list = price_list_data.get(property_id, None)
+        property_developer = item['propertyDeveloper']
         if price_list: payment_plan = price_list[0]['payment_plan']
         else: payment_plan = None
         if rental_income and payment_plan:
@@ -162,6 +165,7 @@ def run_risk_analysis_module(**kwargs):
                 "start_date": item['start_date'],
                 "rental_income": rental_income,
                 "payment_plan": payment_plan,
+                "property_developer": property_developer,
                 "developer_history": {}  # Placeholder for developer history
             }
             risk_score, risk_factors = evaluator.evaluate_property(property_data)

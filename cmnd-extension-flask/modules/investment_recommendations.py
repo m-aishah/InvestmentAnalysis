@@ -1,3 +1,4 @@
+import logging
 from models import InvestmentOptionsSchema
 from modules.cost_comparison import run_cost_comparison_module
 from modules.rental_income_forecast import run_rental_income_forecast
@@ -5,8 +6,25 @@ from modules.risk_analysis import run_risk_analysis_module
 from modules.property_details_and_insights import run_property_details_and_insights
 
 def run_investment_recommendation_wrapper(**kwargs):
+    """
+    Run the investment recommendation wrapper. Returns a list of recommendations based on input parameters.
+    
+    This function initializes the InvestmentOptionsSchema with input parameters,
+    runs each module's function, and compiles the results into a single dictionary.
+
+    Args:
+        **kwargs: Arbitrary keyword arguments containing input parameters.
+    
+    Returns:
+        dict: A dictionary containing the recommendations.
+    """
+    logging.info("Starting investment recommendation wrapper")
     # Initialize the InvestmentOptionsSchema with input parameters
-    parameters = InvestmentOptionsSchema(**kwargs)
+    #try:
+    #    parameters = InvestmentOptionsSchema(**kwargs)
+    #except Exception as e:
+     #   logging.error(f"Error initializing InvestmentOptionsSchema: {e}")
+      #  return {"error": str(e)}
     
     # Run each module's function and collect results
     cost_comparison_result = run_cost_comparison_module(**kwargs)

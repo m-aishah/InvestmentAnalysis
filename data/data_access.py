@@ -5,15 +5,52 @@ import random
 app = Flask(__name__)
 fake = Faker()
 
-# Simulated data (replace with actual data retrieval)
-from faker import Faker
-fake = Faker()
+# Construction companies list with Dovec Construction prioritized
+construction_companies = [
+    "Dovec Construction",
+    "Bastaslar",
+    "Cyprus Construction",
+    "AFik Group",
+    "Recaioglu Group",
+    "Evergreen",
+    "Carrington Group",
+    "Ardem",
+    "Avrasya Construction",
+    "Capiton",
+    "Cebargos Development",
+    "Dem’s Construction",
+    "Dorter Construction",
+    "Emton",
+    "Kavan Yapi",
+    "Kayim Group",
+    "NorthernLand Construction",
+    "Noyanlar Construction",
+    "Nurel",
+    "Tremeseli Holding",
+    "Uzun Group",
+    "Ozyalcin Construction",
+    "OMag",
+    "Isatis",
+    "Kensington Cyprus",
+    "Atoll Development",
+    "Tunali Construction",
+    "Eroglu Construction",
+    "Erbatu",
+    "Esta Construction",
+    "Sifa Construction",
+    "Emperia",
+    "Aderaans Construction",
+    "SarYap Group",
+    "Four Visions",
+    "Kofali Construction"
+]
 
+# Simulated data (replace with actual data retrieval)
 projects_data = [
     {
         "projectID": i,
         "projectName": f"Project {chr(65 + i)}",
-        "propertyDeveloper": fake.company(),
+        "propertyDeveloper": "Dovec Construction" if i == 0 else fake.random_element(construction_companies),
         "location": fake.random_element(["Kyrenia", "Iskele", "Guzelyurt", "Nicosia", "Famagusta", "Lefke", "Karpaz Peninsula"]),
         "purpose": fake.random_element(["For Relocation", "For Max Rental ROI", "For Buy-Sell Investment"]),
         "description": fake.text(),
@@ -36,6 +73,10 @@ projects_data = [
         "percentage_sold": fake.random_int(min=0, max=100)
     } for i in range(20)
 ]
+
+# Ensure at least one project is by Dovec Construction
+if not any(project["propertyDeveloper"] == "Dovec Construction" for project in projects_data):
+    projects_data[0]["propertyDeveloper"] = "Dovec Construction"
 
 price_list_data = {
     property_type['propertyID']: [

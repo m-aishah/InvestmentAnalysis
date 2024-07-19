@@ -52,6 +52,7 @@ def run_property_details_and_insights(**kwargs):
                 'Purpose': item['purpose'],
                 'Completion Date': item['completion_date'],
                 'Facilities': ", ".join(item['facilities']),
+                'ImageURL': item['ImageURL'],
                 'Property Details': details
             })
 
