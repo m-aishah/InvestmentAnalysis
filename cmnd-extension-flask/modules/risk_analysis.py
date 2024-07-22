@@ -1,6 +1,6 @@
 from models import InvestmentOptionsSchema
 from modules.filter_investment_options import filter_investment_options
-from dummy_data import rental_income_data, price_list_data
+from modules.access_data import fetch_rental_income, fetch_price_list
 from datetime import datetime
 import numpy as np
 
@@ -104,13 +104,6 @@ scorer = RiskScorer()
 evaluator = RiskEvaluator(scorer)
 report_generator = RiskReportGenerator()
 
-def fetch_price_list(property_id):
-    # Simulated function to fetch price list data
-    return price_list_data.get(property_id, [])
-
-def fetch_rental_income(property_id):
-    # Simulated function to fetch rental income data
-    return rental_income_data.get(property_id, {})
 
 def gather_property_details(property_id):
     price_list = fetch_price_list(property_id)
@@ -145,8 +138,8 @@ def run_risk_analysis_module(**kwargs):
     for item in filtered_projects:
         projectID = item['projectID']
         property_id = item['propertyID']
-        rental_income = rental_income_data.get(property_id, None)
-        price_list = price_list_data.get(property_id, None)
+        rental_income = fetch_rental_income(property_id)
+        price_list = fetch_price_list(property_id)
         property_developer = item['propertyDeveloper']
         if price_list: payment_plan = price_list[0]['payment_plan']
         else: payment_plan = None

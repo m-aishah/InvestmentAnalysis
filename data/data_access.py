@@ -45,6 +45,8 @@ construction_companies = [
     "Kofali Construction"
 ]
 
+images = ["https://static.tildacdn.com/stor3335-6430-4635-a664-303033613461/19958823.jpg", "https://optim.tildacdn.one/tild3831-3338-4936-b035-626534353538/-/format/webp/90156560.jpeg", "https://optim.tildacdn.com/stor3830-3761-4335-b033-396166663233/-/format/webp/93188055.jpg", "https://optim.tildacdn.com/stor3465-3132-4464-b562-636266383936/-/format/webp/44491027.jpg"]
+
 # Simulated data (replace with actual data retrieval)
 projects_data = [
     {
@@ -57,7 +59,7 @@ projects_data = [
         "start_date": fake.date_between(start_date='-2y', end_date='today').strftime('%Y-%m-%d'),
         "completion_date": fake.date_between(start_date='today', end_date='+2y').strftime('%Y-%m-%d'),
         "facilities": [fake.word().title(), fake.word().title(), fake.word().title()],
-        "image_url": [fake.image_url(), fake.image_url()],
+        "image_url": [fake.random_element(images), fake.image_url()],
         "no_of_installments": fake.random_int(min=6, max=36),
         "no_of_properties": fake.random_int(min=10, max=100),
         "property_types": [
