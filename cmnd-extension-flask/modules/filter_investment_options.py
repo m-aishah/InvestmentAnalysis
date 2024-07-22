@@ -3,13 +3,17 @@ from models import InvestmentOptionsSchema
 from modules.access_data import fetch_available_projects
 
 def filter_investment_options(parameters: InvestmentOptionsSchema):
-    try:
-        projects_data = fetch_available_projects(
-            location=parameters.location,
-            min_price=parameters.budget_min,
-            max_price=parameters.budget_max,
-            purpose='Residential' if parameters.family_size else None
-        )
+    locations = parameters.location.split(', ')
+    projects_data = []
+    try:      
+        for location in locations:
+            projects_data.extend(fetch_available_projects(
+                location=location,
+                min_price=parameters.budget_min,
+                max_price=parameters.budget_max,
+                purpose='Residential' if parameters.family_size else None
+            ))
+            
     except Exception as e:
         raise Exception(f"Failed to fetch projects data: {e}")
     
