@@ -51,6 +51,7 @@ tools = [
         "isLongRunningTool": False,
         "rerun": True,
         "rerunWithDifferentParameters": True
+        # "postCallPrompt": "after getting investment data, look at the most expensive and the cheapest options and put them on a bar chart"
     },
    {
         "name": "investment_recommendations_module",

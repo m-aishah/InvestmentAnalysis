@@ -54,7 +54,9 @@ def run_property_details_and_insights(**kwargs):
                 'Facilities': ", ".join(item['facilities']),
                 'ImageURL': item['ImageURL'],
                 'Property Details': details,
-                '360 view': ""
+                '360 view': "",
+                'Number of Rooms': item['no_of_rooms'],
+                'Number of Bathrooms': item['no_of_bathrooms']
             })
 
             if item['propertyDeveloper'] == 'Dovec Construction':

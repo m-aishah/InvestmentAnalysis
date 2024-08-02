@@ -66,7 +66,7 @@ projects_data = [
             {
                 "propertyID": f"{chr(65 + i)}{j:03}",
                 "no_of_rooms": fake.random_int(min=1, max=5),
-                "type": fake.random_element(["Apartment", "Villa", "Office Space", "Penthouse"]),
+                "type": fake.random_element(["Apartment", "Villa", "Office Space", "Penthouse", "Office"]),
                 "total_area_sqmeter": fake.random_int(min=50, max=500),
                 "no_of_bathrooms": fake.random_int(min=1, max=5),
                 "price": fake.random_element([80000, 100000, 120000, 140000, 160000, 180000, 200000, 220000, 240000, 260000, 280000, 300000, 350000, 400000, 450000, 500000, 1000000])

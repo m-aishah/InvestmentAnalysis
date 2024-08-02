@@ -50,7 +50,6 @@ def run_cost_comparison_module(**props):
     properties = filter_investment_options(parameters)
     if not properties:
         return {"message": "No properties found matching the criteria."}
-    
     comparison_data = []
     for property in properties:
         property_id = property['propertyID']
