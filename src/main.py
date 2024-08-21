@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, abort
 import os
 from dotenv import load_dotenv
 from flask_cors import CORS
-from src.tools import tools
+from tools import tools
 
 # Load environment variables
 load_dotenv()
@@ -32,6 +32,7 @@ def cmnd_tools_endpoint():
 def run_cmnd_tool_endpoint():
     data = request.json
     tool_name = data.get('toolName')
+    print(tool_name)
     props = data.get('props', {})
     #print(props)
     tool = next((t for t in tools if t['name'] == tool_name), None)

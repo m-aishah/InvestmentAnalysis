@@ -67,12 +67,5 @@ def filter_investment_options(parameters: InvestmentOptionsSchema):
     if parameters.sort_by and parameters.sort_by in filtered_projects[0]:
         filtered_projects = sorted(filtered_projects, key=lambda x: x[parameters.sort_by])
 
-    # Ensure at least one property from Dovec Construction
-    dovec_properties = [p for p in filtered_projects if p['propertyDeveloper'] == 'Dovec Construction']
-    if dovec_properties:
-        # Add one Dovec property and one other property
-        other_properties = [p for p in filtered_projects if p['propertyDeveloper'] != 'Dovec Construction']
-        return (dovec_properties[:1] + other_properties[:1]) if other_properties else dovec_properties[:2]
-    else:
-        # Return two properties if no Dovec property is found
+    #
         return filtered_projects

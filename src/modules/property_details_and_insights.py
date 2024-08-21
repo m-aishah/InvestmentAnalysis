@@ -52,7 +52,7 @@ def run_property_details_and_insights(**kwargs):
                 'Purpose': item['purpose'],
                 'Completion Date': item['completion_date'],
                 'Facilities': ", ".join(item['facilities']),
-                'ImageURL': item['ImageURL'],
+                'ImageURL': ["https://static.tildacdn.com/stor3335-6430-4635-a664-303033613461/19958823.jpg", "https://optim.tildacdn.one/tild3831-3338-4936-b035-626534353538/-/format/webp/90156560.jpeg", "https://optim.tildacdn.com/stor3830-3761-4335-b033-396166663233/-/format/webp/93188055.jpg", "https://optim.tildacdn.com/stor3465-3132-4464-b562-636266383936/-/format/webp/44491027.jpg"],
                 'Property Details': details,
                 '360 view': "",
                 'Number of Rooms': item['no_of_rooms'],
@@ -63,4 +63,6 @@ def run_property_details_and_insights(**kwargs):
                 property_details[-1]['360 view'] = 'https://360.dovecconstruction.com/'
             if item['propertyDeveloper'] == 'Noyanlar Construction':
                 property_details[-1]['360 view'] = 'https://360.noyanlar.com/'
+
+            # print(property_details[-1])
     return {"property_details": property_details}
