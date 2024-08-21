@@ -1,9 +1,9 @@
 import logging
-from models import InvestmentOptionsSchema
-from modules.cost_comparison import run_cost_comparison_module
-from modules.rental_income_forecast import run_rental_income_forecast
-from modules.risk_analysis import run_risk_analysis_module
-from modules.property_details_and_insights import run_property_details_and_insights
+from src.models import InvestmentOptionsSchema
+from src.modules.cost_comparison import run_cost_comparison_module
+from src.modules.rental_income_forecast import run_rental_income_forecast
+from src.modules.risk_analysis import run_risk_analysis_module
+from src.modules.property_details_and_insights import run_property_details_and_insights
 
 def run_investment_recommendation_wrapper(**kwargs):
     """

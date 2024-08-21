@@ -1,5 +1,5 @@
-from models import InvestmentOptionsSchema
-from modules.access_data import fetch_available_projects
+from src.models import InvestmentOptionsSchema
+from src.modules.access_data import fetch_available_projects
 
 def filter_investment_options(parameters: InvestmentOptionsSchema):
     if parameters.location:

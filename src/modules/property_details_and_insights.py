@@ -1,6 +1,6 @@
-from models import InvestmentOptionsSchema
-from modules.filter_investment_options import filter_investment_options
-from modules.access_data import fetch_price_list
+from src.models import InvestmentOptionsSchema
+from src.modules.filter_investment_options import filter_investment_options
+from src.modules.access_data import fetch_price_list
 
 def gather_property_details(property_id):
     try:

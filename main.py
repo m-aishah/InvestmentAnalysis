@@ -1,14 +1,18 @@
-from flask import Flask, request, jsonify, abort
+from flask import Flask, request, jsonify, abort, render_template
 import os
 from dotenv import load_dotenv
 from flask_cors import CORS
-from tools import tools
+from src.tools import tools
 
 # Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route("/cmnd-tools", methods=['GET'])
 def cmnd_tools_endpoint():

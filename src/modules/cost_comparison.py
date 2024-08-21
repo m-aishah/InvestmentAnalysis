@@ -1,7 +1,7 @@
 from typing import List, Dict
-from models import InvestmentOptionsSchema
-from modules.filter_investment_options import filter_investment_options
-from modules.access_data import fetch_price_list, fetch_rental_income, fetch_available_projects
+from src.models import InvestmentOptionsSchema
+from src.modules.filter_investment_options import filter_investment_options
+from src.modules.access_data import fetch_price_list, fetch_rental_income, fetch_available_projects
 
 def format_property_data(property, rental_income, price_list):
     # Extracting price data

@@ -1,9 +1,9 @@
-from modules.cost_comparison import run_cost_comparison_module
-from modules.risk_analysis import run_risk_analysis_module
-from modules.property_details_and_insights import run_property_details_and_insights
-from modules.rental_income_forecast import run_rental_income_forecast
-from modules.investment_recommendations import run_investment_recommendation_wrapper
-from models import InvestmentOptionsSchema, custom_json_schema
+from src.modules.cost_comparison import run_cost_comparison_module
+from src.modules.risk_analysis import run_risk_analysis_module
+from src.modules.property_details_and_insights import run_property_details_and_insights
+from src.modules.rental_income_forecast import run_rental_income_forecast
+from src.modules.investment_recommendations import run_investment_recommendation_wrapper
+from src.models import InvestmentOptionsSchema, custom_json_schema
 
 # Define the tool configuration and metadata for CMND.ai
 tools = [
