@@ -74,23 +74,64 @@
             <p class="mt-2">Hover over the diagram for more details.</p>
         </section>
 
-        <section id="links">
+        <section id="links" class="container mt-5">
             <h2 class="mb-4">Navigate</h2>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="/cmnd-tools" class="btn btn-primary">
-                        <i class="fas fa-chart-pie me-2"></i>
-                        Access the main tool interface
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="/run-cmnd-tool" class="btn btn-primary">
-                        <i class="fas fa-play-circle me-2"></i>
-                        Trigger the analysis process
-                    </a>
-                </li>
-            </ul>
+            <div class="row">
+                <!-- Column 1 -->
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="/cmnd-tools" class="btn btn-primary">
+                                <i class="fas fa-chart-pie me-2"></i>
+                                Access the main tool interface
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/run-cmnd-tool" class="btn btn-primary">
+                                <i class="fas fa-play-circle me-2"></i>
+                                Trigger the analysis process
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/api/cost-comparison" class="btn btn-primary">
+                                <i class="fas fa-calculator me-2"></i>
+                                Cost Comparison
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/api/property-details" class="btn btn-primary">
+                                <i class="fas fa-building me-2"></i>
+                                Property Details and Insights
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <!-- Column 2 -->
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="/api/rental-income-forecast" class="btn btn-primary">
+                                <i class="fas fa-dollar-sign me-2"></i>
+                                Rental Income Forecast
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/api/risk-analysis" class="btn btn-primary">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Risk Analysis
+                            </a>
+                        </li>
+                        <!-- Add more links here as needed -->
+                    </ul>
+                </div>
+            </div>
         </section>
+    
+        <!-- Bootstrap and FontAwesome JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </main>
 
     <footer class="bg-dark text-white py-3">

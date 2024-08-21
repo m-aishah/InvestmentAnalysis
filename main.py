@@ -4,6 +4,8 @@ from dotenv import load_dotenv
 from flask_cors import CORS
 from src.tools import tools
 from src.analytics import analytics_bp
+from src.routes.standalone_endpoints import standalone_bp
+
 
 # Load environment variables
 load_dotenv()
@@ -12,6 +14,7 @@ app = Flask(__name__)
 CORS(app)
 
 app.register_blueprint(analytics_bp)
+app.register_blueprint(standalone_bp, url_prefix='/api')
 
 @app.route('/')
 def index():
