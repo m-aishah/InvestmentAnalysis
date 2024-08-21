@@ -4,5 +4,9 @@ httpx
 pydantic
 flask
 requests
-json
-urllib
+python-dotenv
+flask_cors
+pydantic
+requests
+numpy
+faker
