@@ -25,7 +25,6 @@ def filter_investment_options(parameters: InvestmentOptionsSchema):
             )
         except Exception as e:
             raise Exception(f"Failed to fetch projects data: {e}")
-    
     filtered_projects = []
 
     for project in projects_data:
@@ -63,9 +62,9 @@ def filter_investment_options(parameters: InvestmentOptionsSchema):
 
     if not filtered_projects:
         return []
-
+    
     if parameters.sort_by and parameters.sort_by in filtered_projects[0]:
         filtered_projects = sorted(filtered_projects, key=lambda x: x[parameters.sort_by])
 
-    #
-        return filtered_projects
+    
+    return filtered_projects
