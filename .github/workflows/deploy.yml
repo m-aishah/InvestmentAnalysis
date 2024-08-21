@@ -39,7 +39,7 @@ jobs:
             source venv/bin/activate || python3.9 -m venv venv && source venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
-            sudo systemctl restart my_app
+            sudo systemctl restart main_app
             sudo systemctl restart data_access
           EOF
           rm ssh_key.pem

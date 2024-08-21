@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from flask_cors import CORS
 from src.tools import tools
+from src.analytics import analytics_bp
 
 # Load environment variables
 load_dotenv()
@@ -10,8 +11,10 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+app.register_blueprint(analytics_bp)
+
 @app.route('/')
-def home():
+def index():
     return render_template('index.html')
 
 @app.route("/cmnd-tools", methods=['GET'])

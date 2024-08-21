@@ -29,7 +29,7 @@
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <i class="fas fa-chart-line me-2"></i>
-                                    <span id="recent-analyses-count">Loading...</span> analyses in the last 7 days
+                                    <span id="recent-analyses-count">{{ request_count }}</span> requests since last refresh
                                 </li>
                                 <li class="list-group-item">
                                     <i class="fas fa-user-friends me-2"></i>
@@ -58,7 +58,14 @@
 
         <section id="features">
             <h2 class="mb-4">What This Tool Does</h2>
-            <p>This tool helps you analyze investment opportunities by comparing costs, predicting future returns, assessing risks, and providing tailored recommendations.</p>
+            <p>This tool serves as a powerful extension for <a href="https://www.cmnd.ai/" target="_blank">CMND.ai</a>, designed to provide essential information for comprehensive investment analysis. It performs:</p>
+            <ul>
+                <li><strong>Cost Comparison:</strong> Evaluate and compare property costs based on user-defined criteria.</li>
+                <li><strong>Property Details and Insights:</strong> Retrieve and analyze detailed property data, offering valuable insights.</li>
+                <li><strong>Rental Income Forecast:</strong> Predict future rental income to aid in making informed investment decisions.</li>
+                <li><strong>Overall Investment Recommendations:</strong> Generate tailored recommendations based on the analysis of various factors.</li>
+            </ul>
+            <p>In addition to its primary functions within CMND.ai, this tool also offers standalone endpoints for independent use. <a href="/docs">See Documentation</a> for more details.</p>
         </section>
 
         <section id="diagram">
@@ -95,9 +102,7 @@
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>
-        // Load real-time data and update the dashboard
         function updateDashboard() {
-            // Fetch real-time data from the server
             fetch('/dashboard-data')
                 .then(response => response.json())
                 .then(data => {
@@ -105,24 +110,14 @@
                     document.getElementById('active-users-count').textContent = data.active_users;
                     document.getElementById('server-status').textContent = data.server_status;
 
-                    // Update the investment trends chart
                     var options = {
                         series: [{
-                            name: 'Investment Trends',
-                            data: data.investment_trends
+                            name: 'Module Usage',
+                            data: Object.values(data.investment_trends)
                         }],
                         chart: {
-                            type: 'area',
+                            type: 'bar',
                             height: 350,
-                            zoom: {
-                                enabled: false
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        stroke: {
-                            curve: 'straight'
                         },
                         xaxis: {
                             categories: data.investment_trends_labels
@@ -136,9 +131,10 @@
                     console.error('Error fetching dashboard data:', error);
                 });
         }
+        updateDashboard();
 
-        // Update the dashboard every 10 seconds
-        setInterval(updateDashboard, 10000);
+        // setInterval(updateDashboard, 10000);
+
     </script>
 </body>
 </html>
