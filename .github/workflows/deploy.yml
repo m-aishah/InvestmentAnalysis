@@ -1,4 +1,4 @@
-name: Deploy to EC2
+name: CI/CD Pipeline
 
 on:
   push:
@@ -6,22 +6,46 @@ on:
       - main
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.8.1
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          ssh-private-key: ${{ secrets.EC2_SECRET_KEY }}
+          python-version: "3.9"
 
-      - name: Copy files to EC2
+      - name: Install dependencies
         run: |
-          scp -o StrictHostKeyChecking=no -r ./* ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }}:~/your_app/
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Deploy application on EC2
+      - name: Run tests
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_HOST }} 'bash ~/your_app/deploy.sh'
+          source venv/bin/activate
+          # Replace with your actual test command
+          python -m unittest discover tests
+
+      - name: Deploy to AWS EC2
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          USER: ${{ secrets.EC2_USERNAME }}
+          HOST: ${{ secrets.EC2_HOST }}
+        run: |
+          echo "$SSH_KEY" > ssh_key.pem
+          chmod 600 ssh_key.pem
+          ssh -o StrictHostKeyChecking=no -i ssh_key.pem $USER@$HOST << 'EOF'
+            cd /home/ubuntu/InvestmentAnalysis
+            git pull origin main
+            source venv/bin/activate || python3.9 -m venv venv && source venv/bin/activate
+            pip install --upgrade pip
+            pip install -r requirements.txt
+            sudo systemctl restart my_app
+            sudo systemctl restart data_access
+          EOF
+          rm ssh_key.pem
