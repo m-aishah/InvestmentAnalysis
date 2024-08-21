@@ -27,7 +27,7 @@ jobs:
 
       - name: Deploy to AWS EC2
         env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           USER: ${{ secrets.EC2_USERNAME }}
           HOST: ${{ secrets.EC2_HOST }}
         run: |
