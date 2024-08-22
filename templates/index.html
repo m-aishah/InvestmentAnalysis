@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Analysis Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -11,7 +12,10 @@
 <body>
     <header class="bg-primary text-white py-4">
         <div class="container">
-            <h1 class="display-4">Welcome to the Investment Analysis Tool</h1>
+
+            <h1 class="display-4">
+            <img src="static/house.png" alt="House Icon" class="icon me-2">
+            Welcome to the Investment Analysis Tool</h1>
             <p class="lead">Your go-to solution for smart investment decisions</p>
         </div>
     </header>
@@ -58,14 +62,14 @@
 
         <section id="features">
             <h2 class="mb-4">What This Tool Does</h2>
-            <p>This tool serves as a powerful extension for <a href="https://www.cmnd.ai/" target="_blank">CMND.ai</a>, designed to provide essential information for comprehensive investment analysis. It performs:</p>
+            <p>This tool serves as a powerful extension for <a href="https://www.cmnd.ai/" target="_blank"><span class="badge rounded-pill bg-success">CMND.ai</span></a>, designed to provide essential information for comprehensive investment analysis. It performs:</p>
             <ul>
                 <li><strong>Cost Comparison:</strong> Evaluate and compare property costs based on user-defined criteria.</li>
                 <li><strong>Property Details and Insights:</strong> Retrieve and analyze detailed property data, offering valuable insights.</li>
                 <li><strong>Rental Income Forecast:</strong> Predict future rental income to aid in making informed investment decisions.</li>
                 <li><strong>Overall Investment Recommendations:</strong> Generate tailored recommendations based on the analysis of various factors.</li>
             </ul>
-            <p>In addition to its primary functions within CMND.ai, this tool also offers standalone endpoints for independent use. <a href="/docs">See Documentation</a> for more details.</p>
+            <p>In addition to its primary functions within CMND.ai, this tool also offers standalone endpoints for independent use. <a href="/docs"><span class="badge rounded-pill bg-danger">See Documentation</span></a> for more details.</p>
         </section>
 
         <section id="diagram">
@@ -139,7 +143,7 @@
             <p class="mb-0">Powered by Flask, Caddy, GitHub Actions, and more. Developed by Aishah Mabayoje & Godfrey Dekera.</p>
         </div>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script>

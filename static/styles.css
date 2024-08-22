@@ -34,3 +34,49 @@ footer {
     width: 100%;
     bottom: 0;
 }
+
+
+#dashboard {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#dashboard:hover {
+    background-color: #e9ecef; /* Light grey background on hover */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Slightly lift the card on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+h1.display-4 {
+    font-size: 4.5rem; /* Adjust according to your design */
+}
+
+/* Style for icons to match the h1 size */
+.icon {
+    width: 4rem; /* Match the font-size of h1 */
+    height: 4rem; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align with the text */
+}
+
+/* Hover effect for success badge */
+a .badge.bg-success:hover {
+    background-color: #218838; /* Darker shade of green */
+    cursor: pointer;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+}
+
+/* Hover effect for danger badge */
+a .badge.bg-danger:hover {
+    background-color: #c82333; /* Darker shade of red */
+    cursor: pointer;
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    transition: all 0.2s ease-in-out; /* Smooth transition */
+}

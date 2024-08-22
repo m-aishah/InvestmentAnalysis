@@ -1,0 +1,219 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+body {
+    background-color: #FFFDF0;
+    background-image: url('data:image/png;base64,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');
+}
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 2rem 0;
+}
+.sidebar {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+.endpoint-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.endpoint-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.method-tag {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+}
+.get { background-color: #61affe; color: white; }
+.post { background-color: #49cc90; color: white; }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #007bff;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+
+
+
+/* Modal Header in Badge */
+.modal-header {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+}
+
+.modal-title {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    background-color: #0d6efd;
+    color: #fff;
+    border-radius: 0.25rem;
+    font-size: 1.25rem;
+}
+
+/* Button Close */
+.btn-close {
+    background: transparent;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0.5px solid #0d6efd; /* Initial border color */
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease;
+    animation: rotateBorder 5s linear infinite;
+}
+
+/* Modal Body Enhancements */
+.modal-body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    padding: 1.5rem;
+    color: #333;
+    line-height: 1.6;
+    border: 3px solid #0d6efd; /* Initial border color */
+    border-radius: 0.5rem;
+    animation: rotateBorder 5s linear infinite;
+}
+
+@keyframes rotateBorder {
+    0% {
+        border-color: #0d6efd;
+    }
+    25% {
+        border-color: #6610f2;
+    }
+    50% {
+        border-color: #6f42c1;
+    }
+    75% {
+        border-color: #d63384;
+    }
+    100% {
+        border-color: #0d6efd;
+    }
+}
+
+/* Endpoint Code */
+.modal-body code {
+    font-size: 1rem;
+    color: #0d6efd;
+    background-color: #f1f1f1;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+}
+
+/* Badge Styling */
+.badge.bg-success {
+    background-color: #198754;
+    color: #fff;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+/* Request Body Code Block */
+.modal-body pre code {
+    display: block;
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+    overflow-x: auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+/* Table Styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+/* Table Headers */
+.table thead th {
+    background-color: #0d6efd;
+    color: #fff;
+    padding: 0.75rem;
+    text-align: left;
+    border-top: 1px solid #ddd;
+}
+
+/* Table Cells */
+.table td, .table th {
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Alternating Row Colors */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+/* General Text Styles */
+.modal-body h4, .modal-body h5 {
+    margin-top: 1rem;
+    color: #333;
+}
+
+.modal-body p {
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+    border: 1px solid #ddd;
+}
