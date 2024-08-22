@@ -20,6 +20,10 @@ app.register_blueprint(standalone_bp, url_prefix='/api')
 def index():
     return render_template('index.html')
 
+@app.route('/docs')
+def documentation():
+    return render_template('documentation.html')
+
 @app.route("/cmnd-tools", methods=['GET'])
 def cmnd_tools_endpoint():
     tools_response = [
