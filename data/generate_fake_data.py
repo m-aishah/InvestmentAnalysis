@@ -11,6 +11,12 @@ locations = ["All", "Kyrenia", "Iskele", "Guzelyurt", "Nicosia", "Famagusta", "L
 
 # Function to generate property types
 def generate_property_types():
+    """
+    Generate a list of property types with random attributes.
+
+    Returns:
+        list: A list of dictionaries, each representing a property type with attributes such as propertyID, number of rooms, type, total area, number of bathrooms, and price.
+    """
     property_types = []
     for _ in range(random.randint(1, 3)):
         property_id = random.randint(100, 999)
@@ -33,6 +39,12 @@ def generate_property_types():
 
 # Function to generate projects
 def generate_project():
+    """
+    Generate a project with random attributes, including a list of property types.
+
+    Returns:
+        dict: A dictionary representing a project with attributes such as projectID, projectName, etc
+    """
     project_id = random.randint(1, 100)
     project_name = fake.company()
     property_developer = fake.company()
@@ -70,6 +82,16 @@ projects_data = [generate_project() for _ in range(20)]
 
 # Function to generate price list
 def generate_price_list(property_id):
+    """
+     Generate a price list for a specific property ID with random attributes.
+
+    Args:
+        property_id (int): The ID of the property for which to generate the price list.
+
+    Returns:
+        list: A list of dictionaries, each representing a price entry with attributes 
+        such as apartment type, block, floor, area measurements, and payment plan details.
+    """
     return [
         {
             "No": i,
@@ -109,6 +131,19 @@ price_list_data = {property['propertyID']: generate_price_list(property['propert
 
 # Function to generate rental income
 def generate_rental_income(property_id):
+    """
+    Generate rental income data for a specific property ID with random scenarios.
+
+    Args:
+        property_id (int): The ID of the property for which to generate rental income data.
+
+    Returns:
+       dict: A dictionary with rental income scenarios 
+       (pessimistic, realistic, optimistic) 
+        including details such as number of rental days, average daily rate, gross rental income,
+        net income, unit price, annual net rental yield, and ROI.
+    """
+    
     scenarios = ["pessimistic", "realistic", "optimistic"]
     return {
         "propertyID": property_id,

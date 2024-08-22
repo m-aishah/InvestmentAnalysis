@@ -158,6 +158,19 @@ rental_income_data = {
 # Endpoint to get available projects
 @app.route('/projects/available_projects', methods=['GET'])
 def get_available_projects():
+    """
+    Retrieve a list of available projects based on optional query parameters.
+
+    Query Parameters:
+        - location (str): The location of the projects to filter.
+        - min_price (int): The minimum price of the projects to filter.
+        - max_price (int): The maximum price of the projects to filter.
+        - purpose (str): The purpose of the projects to filter (e.g., 'residential', 'commercial').
+
+    Returns:
+    - JSON response containing a list of filtered projects that match the query parameters.
+    """
+    
     location = request.args.get('location')
     min_price = request.args.get('min_price', type=int)
     max_price = request.args.get('max_price', type=int)
@@ -177,12 +190,32 @@ def get_available_projects():
 # Endpoint to get price list of a specific property
 @app.route('/projects/available_projects/<propertyID>/price_list', methods=['GET'])
 def get_price_list(propertyID):
+    """
+    Retrieve the price list for a specific property identified by its ID.
+
+    Parameters:
+    - propertyID (str): The ID of the property for which to retrieve the price list.
+
+    Returns:
+    - JSON response containing the price list for the specified property.
+    """
+    
     price_list = price_list_data.get(propertyID, [])
     return jsonify(price_list)
 
 # Endpoint to get rental income of a specific property
 @app.route('/projects/available_projects/<propertyID>/rental_income', methods=['GET'])
 def get_rental_income(propertyID):
+    """
+    Retrieve the rental income data for a specific property identified by its ID.
+
+    Parameters:
+    - propertyID (str): The ID of the property for which to retrieve rental income data.
+
+    Returns:
+    - JSON response containing the rental income data for the specified property.
+    """
+    
     rental_income = rental_income_data.get(propertyID, {})
     return jsonify(rental_income)
 
