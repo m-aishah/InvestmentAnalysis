@@ -70,7 +70,7 @@ def run_cost_comparison_module(**props):
         return {"error": str(e)}
 
     properties = filter_investment_options(parameters)
-    print(properties)
+    # print(properties)
     if not properties:
         return {"message": "No properties found matching the criteria."}
     comparison_data = []

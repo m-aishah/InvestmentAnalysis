@@ -6,3 +6,5 @@ src/__pycache__
 src/modules/__pycache__
 src/routes/__pycache__
 static/flow_animate.svg
+__pycache__/
+*.pyc
