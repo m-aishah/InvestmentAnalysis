@@ -2,6 +2,17 @@ from src.models import InvestmentOptionsSchema
 from src.modules.access_data import fetch_available_projects
 
 def filter_investment_options(parameters: InvestmentOptionsSchema):
+    """
+    Filter investment options based on the provided criteria.
+
+    Args:
+        parameters (InvestmentOptionsSchema): An instance of InvestmentOptionsSchema containing
+        the filtering criteria such as location, budget range, property size, number of rooms, and other attributes.
+
+    Returns:
+        List[Dict]: A list of dictionaries where each dictionary represents a filtered property,
+        including project details and property attributes. Returns an empty list if no properties match the criteria.
+    """
     if parameters.location:
         locations = parameters.location.split(', ')
         projects_data = []

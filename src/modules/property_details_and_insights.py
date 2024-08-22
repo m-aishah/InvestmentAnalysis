@@ -3,6 +3,22 @@ from src.modules.filter_investment_options import filter_investment_options
 from src.modules.access_data import fetch_price_list
 
 def gather_property_details(property_id):
+    '''
+    Gathers detailed property information for a given property ID by fetching the price list
+    and processing the data to include various details about the property.
+
+    Args:
+        property_id (str): The unique identifier for the property whose details are to be gathered.
+
+    Returns:
+        List[Dict[str, Union[str, float]]]: A list of dictionaries where each dictionary contains
+        details about a specific property, including apartment type, block, floor, areas in square meters,
+        price information, and payment plan details.
+
+    Raises:
+        Exception: If fetching the price list fails, an exception is raised with a message indicating the failure.
+
+    '''
     try:
         price_list = fetch_price_list(property_id)
     except Exception as e:

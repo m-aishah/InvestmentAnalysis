@@ -4,6 +4,17 @@ from src.modules.filter_investment_options import filter_investment_options
 from src.modules.access_data import fetch_price_list, fetch_rental_income, fetch_available_projects
 
 def format_property_data(property, rental_income, price_list):
+    """
+    Format property data with associated rental income and price list information.
+
+    Args:
+        property (Dict): A dictionary containing property details 
+        rental_income (Dict): A dictionary containing rental income data for the property, with different scenarios (e.g., 'realistic').
+        price_list (Dict): A dictionary containing the price list data for the property
+
+    Returns:
+        Dict: A dictionary with formatted property data
+    """
     # Extracting price data
     project_name = property['projectName']
     property_type = property['type']
@@ -42,6 +53,17 @@ def format_property_data(property, rental_income, price_list):
     return formatted_data
 
 def run_cost_comparison_module(**props):
+    """
+    Run the cost comparison module to evaluate investment options based on provided parameters.
+
+    Args:
+        **props: Arbitrary keyword arguments representing investment criteria
+        (e.g., location, min_price, max_price, etc.).
+
+    Returns:
+        Dict: A dictionary containing the comparison results
+    """
+    
     try:
         parameters = InvestmentOptionsSchema(**props)
     except Exception as e:
