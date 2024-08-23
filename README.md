@@ -1,147 +1,55 @@
-# CMND.ai Extension
+# CMND.ai Real Estate Investment Tool
 
-## Concepts: 
-- **LLM**: A type of AI, like ChatGPT, trained on vast amounts of text data to generate human-like responses based on text inputs.
+## Overview
 
-- **Assistants**: Digital or virtual agents designed to assist users in performing a wide range of tasks via conversational interfaces. These assistants use an LLM as their core intelligence.
+The CMND.ai Real Estate Investment Tool is an extension designed to help users make informed real estate investment decisions. Built using Flask and deployed on AWS, this tool integrates seamlessly with CMND.ai, providing a range of functionalities to assist users in evaluating properties based on cost, risk, rental income, and overall investment potential.
 
-- **Tools**: Pre-defined functions or APIs that extend the capabilities of an LLM to perform specific tasks beyond its abilities.
-- **RAG**: A technique that enhances Large Language Models by enabling them to access and utilize foundational knowledge.
+## Features
 
-- **Assistants With Tools**: Digital agents equipped with functionalities that LLMs alone cannot perform, such as accessing real-time data.
+### 1. Cost Comparison Tool
 
-- **Assistants With RAG**: Digital agents equipped with the capability to acquire external knowledge and use it to enhance it's capabilites.
-  
+- **Description**: Compares the prices of properties within a specified budget range and location.
+- **Usage**: Helps users quickly identify properties that match their financial criteria.
 
-## Introduction
+### 2. Rental Income Forecast
 
-### Assistants:
-computer programs that serve as virtual assistants and communicate with users through text-based interfaces on websites, social media platforms and messaging apps. These chatbots can assist customers, respond to inquiries or start a discussion with them. By equiping the asssitant with tools, the asssitant will be able to perform tasks that the LLM cannot do, and give it's result to the LLM to give you the final answer.
+- **Description**: Provides estimates on potential rental income based on historical data and market trends.
+- **Usage**: Assists users in understanding the income potential of a property.
 
-### Tools:
-allows you to describe functions to the Assistants API and have it intelligently return the functions that need to be called along with their arguments.
+### 3. Risk Analysis
 
-![src/assistants.png](src/assistants.png)
+- **Description**: Evaluates various risk factors associated with properties, such as location, market volatility, and developer history.
+- **Usage**: Enables users to assess the risk profile of a property before investing.
 
-### Create Assistant Exampele
-```python
-from openai import OpenAI
-client = OpenAI()
-  
-assistant = client.beta.assistants.create(
-  name="Math Tutor",
-  instructions="You are a personal math tutor. Write and run code to answer math questions.",
-  tools=[{"type": "code_interpreter"}],
-  model="gpt-4-turbo",
-```
-In this code, there is tools attribute, where you pass the tools that you have created
+### 4. Property Details and Insights
 
-### Create Tools Example 
+- **Description**: Offers detailed information about properties, including developer details, facilities, and historical data.
+- **Usage**: Provides comprehensive insights to aid in making informed decisions.
 
-```python
-from openai import OpenAI
-client = OpenAI()
+### 5. General Investment Recommendation
 
-assistant = client.beta.assistants.create(
-  instructions="You are a weather bot. Use the provided functions to answer questions.",
-  model="gpt-4-turbo",
-  tools=[
-    {
-      "type": "function",
-      "function": {
-        "name": "get_current_temperature",
-        "description": "Get the current temperature for a specific location",
-        "parameters": {
-          "type": "object",
-          "properties": {
-            "location": {
-              "type": "string",
-              "description": "The city and state, e.g., San Francisco, CA"
-            },
-            "unit": {
-              "type": "string",
-              "enum": ["Celsius", "Fahrenheit"],
-              "description": "The temperature unit to use. Infer this from the user's location."
-            }
-          },
-          "required": ["location", "unit"]
-        }
-      }
-    }
-  }
-```
+- **Description**: Generates tailored investment recommendations based on user preferences and property data.
+- **Usage**: Guides users towards properties that align with their investment goals.
 
-## Getting Started: 
-This repository hosts a FastAPI and Flask applications, both designed to execute various server-side tools  and add them to CMND.ai dynamically based on requests. It allows users to query tool information and run specific tools by passing parameters.
+## Usage
 
-1. Clone the repository:
-```bash
-git clone git@github.com:CyprusCodes/cmnd-extension-sample-python.git
-``` 
+This tool is designed to integrate seamlessly with CMND.ai to provide users with powerful investment analysis capabilities. Once connected to CMND.ai, the tool leverages the platform’s AI-driven insights to enhance decision-making in real estate investments.
 
-3. Install the requirements
-```bash
-pip install requirements.txt
-```
+The tool can also be accessed directly via the following URL: [http://13.61.32.149/](http://13.61.32.149/). Here, users can interact with various endpoints that provide specific functionalities:
 
-5. Navigate to the cloned directory:
-```bash
-cmnd-extension-sample-python
-```
+- **Cost Comparison Tool**: `/api/cost-comparison` (POST)
+- **Rental Income Forecast**: `/api/rental-income-forecast` (POST)
+- **Risk Analysis**: `/api/risk-analysis` (POST)
+- **Property Details and Insights**: `/api/property-details` (POST)
+- **General Investment Recommendation**: `/api/investment-recommendation` (POST)
 
-7. Determine whether you are using FastAPI or Flask, and navigate to the chosen directory.
+### Technologies Used
 
-8. Navigate to the tools file
+- **Python**: Core programming language for backend development.
+- **Flask**: Lightweight web framework for creating API endpoints.
+- **Pydantic**: Data validation and settings management using Python type annotations.
+- **AWS EC2**: Deployed on an Amazon EC2 instance for scalability and reliability.
+- **Caddy**: Utilized as a reverse proxy to manage traffic efficiently.
+- **CI/CD Pipeline**: Continuous Integration and Continuous Deployment (CI/CD) is set up to automate testing and deployment, ensuring that any updates or changes are deployed seamlessly.
 
-9. Within the tool.py, create your tool definition by first defining data validation schema using Pydentic, then create your tools implementation, and at the end create your tool configuration and metadata
-
-```python
-# Define data validation schemas using Pydantic for different functionalities
-class WeatherCitySchema(BaseModel):
-    city: str = Field(..., title="City", description="City name required"
-
-# Define your tools implementation
-async def weather_from_location(city: str):
-    api_key = os.getenv('WEATHER_API_KEY')
-    if not api_key:
-        raise ValueError("API key for weather data is not set in environment variables.")
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
-    async with httpx.AsyncClient() as client:
-        response = await client.get(url)
-        return response.json()
-
-# Define your tools configuration and metadata
-tool = [
-{
-        "name": "weather_from_location",
-        "description": "Gets the weather details from a given city name",
-        "parameters": custom_json_schema(WeatherCitySchema),
-        "runCmd": weather_from_location,
-        "isDangerous": False,
-        "functionType": "backend",
-        "isLongRunningTool": False,
-        "rerun": True,
-        "rerunWithDifferentParameters": True
-    }
-]
-````
-7. Run your app (server):
-``` bash
-python3 main.py
-```
-8. Any API keys required for your tools should be stored in your .env file.
-
-The rest pertains to endpoints and various functions that support these endpoints. Therefore, you will not need to modify the main.py in any case. Instead, you will only make changes to the tools.py file, where you will initially add your tool's schema definition, implement the tool, and finally configure the tool settings.
-
-## Run Your Server Publicly using ngrok 
-
-1. Create an ngrok account and set up ngrok on your personal computer. [ngrok accounts and setup](https://ngrok.com/docs/getting-started/?os=macos)
-2. After setting ngrok on you computer, run the main.py
-```python
-python3 main.py
-```
-3. Now your app is runing on localhost, if you want to run it on public URL, so you run the below command in your terminal, but make sure the port of your app specified in your main.py is the same as the port used by ngrok in your command 
-```bash
-ngrok http 8000 
-```
-once again the port that you are writing in the above command should be the port that your app runnning on 
+This setup allows the tool to be robust, scalable, and easy to maintain, providing a reliable solution for real estate investment analysis.
