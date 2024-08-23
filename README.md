@@ -1,8 +1,8 @@
-# CMND.ai Real Estate Investment Tool
+# Real Estate Investment Tool
 
 ## Overview
 
-The CMND.ai Real Estate Investment Tool is an extension designed to help users make informed real estate investment decisions. Built using Flask and deployed on AWS, this tool integrates seamlessly with CMND.ai, providing a range of functionalities to assist users in evaluating properties based on cost, risk, rental income, and overall investment potential.
+The Real Estate Investment Tool is an extension designed to help users make informed real estate investment decisions. Built using Flask and deployed on AWS, this tool integrates seamlessly with CMND.ai, providing a range of functionalities to assist users in evaluating properties based on cost, risk, rental income, and overall investment potential.
 
 ## Features
 
